@@ -36,7 +36,13 @@ class InfoWidget extends Component {
           }
 
         </div>
-        <button className="clear-tasks">Clear Completed</button>
+        
+        {
+          this.props.checked 
+          ? <button className="clear-tasks" onClick={this.props.clearAll}>Clear Completed</button>
+          : <div></div>
+        }
+        
       </div>
     )
   }

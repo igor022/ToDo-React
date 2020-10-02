@@ -70,6 +70,15 @@ class App extends Component {
     this.setState({ filterMethod: filter });
   }
 
+  getCompletedTodos = () =>  {
+    return this.state.todos.filter((todo) => todo.completed);
+  } 
+  
+  clearAll = () => {
+    this.setState((state) => ({
+      todos: state.todos.filter((todo) => !todo.completed)
+    }))
+  } 
   
   
   render() {
@@ -84,23 +93,23 @@ class App extends Component {
         <h1>todos</h1>
         <div className="container">
           <AddTodo addTodo={this.addTodo} handleCheckAll={this.handleCheckAll}/>
-          <div className="todos" id="todos">
-            {
-              this.state.todos
-                .filter(this.state.filterMethod)
-                .map((todo) => 
-                  <TodoItem 
-                    todo={todo} 
-                    changeTodoStatus={this.changeTodoStatus} 
-                    deleteTodo={this.deleteTodo}
-                    key={todo.id}
-                  />
-                )
-            }
-          </div>
+          <div className="todos" id="todos"> {
+            this.state.todos
+              .filter(this.state.filterMethod)
+              .map((todo) => 
+                <TodoItem 
+                  todo={todo} 
+                  changeTodoStatus={this.changeTodoStatus} 
+                  deleteTodo={this.deleteTodo}
+                  key={todo.id}
+                />
+              )
+          } </div>
           <InfoWidget 
-            todoCount={this.state.todos.filter((todo) => !todo.completed).length}
+            todoCount={this.state.todos.length - this.getCompletedTodos().length}
             buttons={buttons}
+            clearAll={this.clearAll}
+            checked={this.getCompletedTodos().length > 0}
           />
         </div>
       </div>

@@ -70,7 +70,6 @@ body {
     border-radius: 5px; }
   .additional-info .clear-tasks {
     width: 25%;
-    visibility: hidden;
     text-decoration: underline; }
 
 .promo {
