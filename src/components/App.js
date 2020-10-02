@@ -29,8 +29,17 @@ class App extends Component{
     }));
   }
 
-  checkTodo = (id) => {
-    console.log(id);
+  changeTodoStatus = (id, status) => {
+    const todoIndex = this.state.todos.findIndex((todo) => todo.id === id);
+    if (todoIndex !== -1) {
+      const todo = {...this.state.todos[todoIndex], completed: status};
+      const updatedTodos = [...this.state.todos];
+      updatedTodos.splice(todoIndex, 1, todo);
+
+      this.setState({
+        todos: updatedTodos
+      })
+    }
   }
 
   deleteTodo = (id) => {
@@ -52,14 +61,14 @@ class App extends Component{
                 .map((todo) => 
                   <TodoItem 
                     todo={todo} 
-                    checkTodo={this.checkTodo} 
+                    changeTodoStatus={this.changeTodoStatus} 
                     deleteTodo={this.deleteTodo}
                     key={todo.id}
                   />
                 )
             }
           </div>
-          <InfoWidget todoCount={this.state.todos.length}/>
+          <InfoWidget todoCount={this.state.todos.filter((todo) => !todo.completed).length}/>
         </div>
       </div>
     );
