@@ -66,28 +66,19 @@ class App extends Component {
       })
   }
 
-  handleFilter = (filterClass) => {
-
-    switch(filterClass) {
-      case 'all': 
-        this.setState({
-          filterMethod: this.filterAll
-        })
-        break;
-      case 'current':
-        this.setState({
-          filterMethod: this.filterActive
-        })
-        break;
-      case 'completed':
-        this.setState({
-          filterMethod: this.filterCompleted
-        })
-        break;
-    }
+  handleFilter = (filter) => {
+    this.setState({ filterMethod: filter });
   }
 
+  
+  
   render() {
+    const buttons = [
+      { className: 'all', value: 'All', filter: this.filterAll},
+      { className: 'current', value: 'Active', filter: this.filterActive },
+      { className: 'completed', value: 'Completed', filter: this.filterCompleted },
+    ];
+
     return (
       <div className="App">
         <h1>todos</h1>
@@ -108,8 +99,9 @@ class App extends Component {
             }
           </div>
           <InfoWidget 
-            todoCount= {this.state.todos.filter((todo) => !todo.completed).length}
-            handleFilter = {this.handleFilter}
+            todoCount={this.state.todos.filter((todo) => !todo.completed).length}
+            buttons={buttons}
+            handleFilter={this.handleFilter}
           />
         </div>
       </div>

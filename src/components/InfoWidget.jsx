@@ -5,20 +5,16 @@ class InfoWidget extends Component {
     selected: 0
   } 
 
-  changeSelected = (index, className) => {
+  changeSelected = (button, i) => {
     this.setState({
-      selected: index
+      selected: i
     })
-    this.props.handleFilter(className);
+    this.props.handleFilter(button.filter);
   }
   
   render() {
     const { todoCount } = this.props;
-    const buttons = [
-      { className: 'all', value: 'All' },
-      { className: 'current', value: 'Active' },
-      { className: 'completed', value: 'Completed' },
-    ];
+    
 
     return(
       <div className="additional-info">
@@ -28,11 +24,11 @@ class InfoWidget extends Component {
         </p>
         <div className="filter-buttons">
           {
-            buttons.map((b, i) => (
+            this.props.buttons.map((b, i) => (
               <button 
                 className={`${b.className} ${this.state.selected === i ? 'selected' : ''}`} 
                 key={i}
-                onClick={() => this.changeSelected(i, b.className)}
+                onClick={() => this.changeSelected(b, i)}
               >
                 {b.value}
               </button>
