@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 
 class InfoWidget extends Component {
     render() {
+        const { todoCount } = this.props;
+
         return(
             <div className="additional-info">
-                <p><span className="items-count"></span>0 left</p>
+                <p>
+                    <span className="items-count"></span>
+                    {`${todoCount} item${ todoCount === 1 ? '' : 's'} left`}
+                </p>
                 <div className="filter-buttons">
                     <button className="all selected">All</button>
                     <button className="current">Active</button>

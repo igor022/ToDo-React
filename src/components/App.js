@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AddTodo from './AddTodo';
-import TodoList from './TodoList';
+import TodoItem from './TodoItem';
 import InfoWidget from './InfoWidget';
 
 class App extends Component{
@@ -9,17 +9,13 @@ class App extends Component{
     filterMethod: this.filterAll,
   }
 
-  filterAll = () => {
-      return true;
-  }
+  filterTodo = (todo) => this.state.filterMethod(todo);
 
-  filterActive = (todo) => {
-      return !todo.completed;
-  }
+  filterAll = () => true;
 
-  filterCompleted = (todo) => {
-      return todo.completed;
-  }
+  filterActive = (todo) => !todo.completed;
+
+  filterCompleted = (todo) => todo.completed;
 
   addTodo = (text) => {
     const todo = {
@@ -33,17 +29,37 @@ class App extends Component{
     }));
   }
 
+  checkTodo = (id) => {
+    console.log(id);
+  }
+
+  deleteTodo = (id) => {
+    const updatedTodos = this.state.todos.filter((todo) => todo.id !== id);
+    this.setState({
+      todos: updatedTodos
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <h1>todos</h1>
         <div className="container">
           <AddTodo addTodo={this.addTodo}/>
-          <TodoList 
-            todos={this.state.todos} 
-            filterMethod={this.filterAll}
-          />
-          <InfoWidget />
+          <div className="todos" id="todos">
+            {
+              this.state.todos
+                .map((todo) => 
+                  <TodoItem 
+                    todo={todo} 
+                    checkTodo={this.checkTodo} 
+                    deleteTodo={this.deleteTodo}
+                    key={todo.id}
+                  />
+                )
+            }
+          </div>
+          <InfoWidget todoCount={this.state.todos.length}/>
         </div>
       </div>
     );

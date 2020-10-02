@@ -1,11 +1,11 @@
 import React from 'react';
 
-function TodoItem({ todo }) {
+function TodoItem({ todo, checkTodo, deleteTodo }) {
     return(
         <div className={`task ${todo.completed ? 'completed' : ''}`}>
-            <button className="check"></button>
+            <button className="check" onClick={() => checkTodo(todo.id)}></button>
             <p>{todo.text}</p>
-            <button className="delete"></button>
+            <button className="delete" onClick={() => deleteTodo(todo.id)}></button>
         </div>
     )
 }
