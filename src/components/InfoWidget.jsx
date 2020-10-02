@@ -9,7 +9,7 @@ class InfoWidget extends Component {
     this.setState({
       selected: i
     })
-    this.props.handleFilter(button.filter);
+    button.onClick();
   }
   
   render() {
