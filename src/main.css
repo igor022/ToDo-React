@@ -33,7 +33,7 @@ body {
   border-bottom: 3px solid #ededed;
   box-sizing: border-box; }
   .add-todo .check-all {
-    background: center/contain no-repeat url("/public/arrow.png");
+    background: center/contain no-repeat url("./img/arrow.png");
     padding: 12px;
     border: 0;
     margin-left: 11px; }
@@ -104,7 +104,7 @@ body {
     background-color: inherit;
     outline: none; }
   .task .delete {
-    background: center/contain no-repeat url("/public/cross.png");
+    background: center/contain no-repeat url("./img/cross.png");
     border: 0px;
     padding: 10px;
     margin-right: 10px;
